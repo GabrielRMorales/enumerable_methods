@@ -1,18 +1,17 @@
 module Enumerable
   
 def my_each
-    i=0
-   while i!=self.length
+  return "This needs a block" unless block_given?
+  i=0
+  while i!=self.length
     yield(self, i)
     i+=1
-   end 
+  end 
  end 
  
-#arr=[1,2,4,5,6]
-#my_each(arr) { |p, i| puts "#{p[i]}"}
-
 def my_each_with_index
-    i=0
+  return "This needs a block" unless block_given?
+  i=0
    while i!=self.length
     j=self.index(self[i])
     yield(self, i, j)
@@ -22,10 +21,11 @@ def my_each_with_index
 
 def my_select
   newarr=[]
+  return newarr unless block_given? 
    i=0
-   while i!=self.length-1
+   while i<self.length
     if yield(self, i)==true
-      newarr<< self[i]
+      newarr << self[i]
     end
     i+=1
    end
@@ -74,7 +74,7 @@ def my_count
     i+=1
    end
    i
- end 
+
 end
 
 def my_map
@@ -125,4 +125,8 @@ def multiply_els(arr)
   newnum=arr.my_inject(1) {|x,y| x*=y}  
 end
 
+end
+
+class Array
+  include Enumerable
 end
