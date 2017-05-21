@@ -1,5 +1,5 @@
 module Enumerable
-  
+
 def my_each
   return "This needs a block" unless block_given?
   i=0
@@ -35,7 +35,7 @@ end
 def my_all?
   i=0
   all=true
-   while i!=self.length
+   while i<self.length
     if yield(self, i)==false
       all=false
     end
@@ -69,12 +69,12 @@ def my_none?
 end
 
 def my_count
+  return nil if self==nil
     i=0
    while i!=self.length
     i+=1
    end
    i
-
 end
 
 def my_map
@@ -112,17 +112,20 @@ def my_map_proc_or_block(p=nil)
 end
 
 def my_inject
-   newval=0
-     i=0
-   while i!=self.length
-    newval= yield(newval, self[i])
+   return nil if self.length==0
+    newval=self[0]
+    raise "This should not have letters" if self[0]==self[0].to_s
+     i=1
+   while i<self.length
+    raise "This should not have letters" if self[i]==self[i].to_s
+    newval= yield(newval, self[i].to_i)
     i+=1
    end
    newval
 end
 
-def multiply_els(arr)
-  newnum=arr.my_inject(1) {|x,y| x*=y}  
+def multiply_els
+  newnum=self.my_inject {|x,y| x*=y}  
 end
 
 end

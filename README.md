@@ -1,0 +1,1 @@
+These are enumerable methods as made for Arrays. These enumerable methods won't work on Hashes. To allow them to, my_each would turn its value into an array via to_a. Then the subsequent methods would incorporate my_each.
